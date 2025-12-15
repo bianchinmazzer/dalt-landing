@@ -211,7 +211,7 @@ export default function PoliticaPrivacidadPage() {
                 12. Cambios a esta Política
               </h2>
               <p className="text-gray-700 mb-4">
-                Podemos actualizar esta política de privacidad periódicamente. Le notificaremos sobre cambios significativos publicando la nueva política en nuestro sitio web y actualizando la fecha de "última actualización".
+                Podemos actualizar esta política de privacidad periódicamente. Le notificaremos sobre cambios significativos publicando la nueva política en nuestro sitio web y actualizando la fecha de &ldquo;última actualización&rdquo;.
               </p>
             </section>
 

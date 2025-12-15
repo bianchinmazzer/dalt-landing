@@ -34,31 +34,31 @@ export default function Footer() {
             <h3 className="text-lg font-display font-bold mb-6">Enlaces Rápidos</h3>
             <ul className="space-y-3">
               <li>
-                <a
+                <Link
                   href="/#inicio"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   Inicio
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/#por-que-elegirnos"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   ¿Por qué elegirnos?
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/#como-funciona"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   Cómo funciona
-                </a>
+                </Link>
               </li>
               <li>
                 <Link
@@ -70,13 +70,13 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/#contacto"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
                   <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
                   Contacto
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
