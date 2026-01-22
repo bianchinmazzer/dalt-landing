@@ -1,33 +1,8 @@
 import Link from "next/link";
-import Image from "next/image";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { ArrowDownTrayIcon } from "@heroicons/react/24/outline";
-
-// Datos de marcas - Sistema actualizado
-const brands = [
-  {
-    id: 1,
-    name: "Senye",
-    description: "Descripción completa de los productos que ofrece esta marca. Incluye características principales y tipos de productos disponibles en el catálogo.",
-    logo: "/productos/logo-senye.jpg",
-    catalogUrl: "/productos/senye.pdf",
-  },
-  {
-    id: 2,
-    name: "Lvxing",
-    description: "Descripción completa de los productos que ofrece esta marca. Incluye características principales y tipos de productos disponibles en el catálogo.",
-    logo: "/productos/lvxing.png",
-    catalogUrl: "/productos/lvxing.pdf",
-  },
-  {
-    id: 3,
-    name: "Baylor",
-    description: "Descripción completa de los productos que ofrece esta marca. Incluye características principales y tipos de productos disponibles en el catálogo.",
-    logo: "/productos/baylor.png",
-    catalogUrl: "/productos/baylor.pdf",
-  },
-];
+import ProductCard from "../components/ProductCard";
+import { brands } from "@/data/brands";
 
 export default function ProductosPage() {
   return (
@@ -41,8 +16,8 @@ export default function ProductosPage() {
             Nuestros Productos
           </h1>
           <p className="text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
-            Descargá los catálogos de las marcas que importamos. Trabajamos con
-            proveedores confiables para ofrecerte la mejor calidad al mejor precio.
+            Conocé las marcas que importamos. Trabajamos con proveedores
+            confiables para ofrecerte la mejor calidad al mejor precio.
           </p>
         </div>
       </section>
@@ -50,43 +25,9 @@ export default function ProductosPage() {
       {/* Brands Grid */}
       <section className="py-16 px-4">
         <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {brands.map((brand) => (
-              <div
-                key={brand.id}
-                className="bg-white rounded-2xl p-8 border-2 border-gray-100 shadow-lg hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-[1.02] group"
-              >
-                {/* Logo */}
-                <div className="w-full aspect-square bg-gray-100 rounded-lg mb-6 flex items-center justify-center group-hover:bg-gray-200 transition-colors overflow-hidden">
-                  <Image
-                    src={brand.logo}
-                    alt={brand.name}
-                    width={300}
-                    height={300}
-                    className="w-full h-full object-contain p-4"
-                  />
-                </div>
-
-                {/* Brand Name */}
-                <h3 className="text-2xl font-display font-bold text-primary-900 mb-4 text-center">
-                  {brand.name}
-                </h3>
-
-                {/* Description */}
-                <p className="text-gray-600 text-center mb-6 leading-relaxed">
-                  {brand.description}
-                </p>
-
-                {/* Download Button */}
-                <a
-                  href={brand.catalogUrl}
-                  download
-                  className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 flex items-center justify-center space-x-2 group/btn"
-                >
-                  <ArrowDownTrayIcon className="w-5 h-5 group-hover/btn:animate-bounce" />
-                  <span>Descargar Catálogo</span>
-                </a>
-              </div>
+              <ProductCard key={brand.id} brand={brand} />
             ))}
           </div>
         </div>

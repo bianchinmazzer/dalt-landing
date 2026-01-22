@@ -1,6 +1,22 @@
-import { ShoppingCartIcon, HandRaisedIcon, ArrowRightIcon } from "@heroicons/react/24/outline";
+"use client";
+
+import {
+  ShoppingCartIcon,
+  HandRaisedIcon,
+  ArrowRightIcon,
+} from "@heroicons/react/24/outline";
 
 export default function ProcessSection() {
+  const handleConsultar = (tipo: string) => {
+    // Update URL without navigation
+    window.history.replaceState(null, "", `/?tipo=${tipo}`);
+    // Scroll to contact section
+    const contactSection = document.getElementById("contacto");
+    if (contactSection) {
+      contactSection.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   const services = [
     {
       icon: ShoppingCartIcon,
@@ -18,7 +34,11 @@ export default function ProcessSection() {
       title: "Gestión de Importaciones",
       description:
         "Si tenés una empresa o negocio y querés importar tus propios productos, gestionamos todo el proceso de principio a fin.",
-      features: ["Comisión transparente", "Seguimiento completo", "Asesoramiento profesional"],
+      features: [
+        "Comisión transparente",
+        "Seguimiento completo",
+        "Asesoramiento profesional",
+      ],
       badge: "Para tu negocio",
       color: "from-accent-500 to-accent-700",
     },
@@ -57,7 +77,9 @@ export default function ProcessSection() {
               </div>
 
               {/* Icon */}
-              <div className={`bg-gradient-to-br ${service.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
+              <div
+                className={`bg-gradient-to-br ${service.color} w-16 h-16 rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}
+              >
                 <service.icon className="w-8 h-8 text-white" />
               </div>
 
@@ -82,13 +104,17 @@ export default function ProcessSection() {
               </ul>
 
               {/* CTA */}
-              <a
-                href={`#contacto?tipo=${service.badge === "Para ti" ? "para-ti" : "para-negocio"}`}
+              <button
+                onClick={() =>
+                  handleConsultar(
+                    service.badge === "Para ti" ? "para-ti" : "para-negocio",
+                  )
+                }
                 className={`inline-flex items-center space-x-2 bg-gradient-to-r ${service.color} text-white font-semibold py-3 px-6 rounded-lg shadow-md hover:shadow-xl transition-all duration-300 transform hover:scale-105 group/btn`}
               >
                 <span>Consultar</span>
                 <ArrowRightIcon className="w-5 h-5 group-hover/btn:translate-x-1 transition-transform" />
-              </a>
+              </button>
             </div>
           ))}
         </div>

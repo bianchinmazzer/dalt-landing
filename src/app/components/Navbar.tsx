@@ -33,7 +33,7 @@ export default function Navbar() {
             className="group transition-transform duration-300 hover:scale-105"
           >
             <Image
-              src="/dalt-logo.jpg"
+              src="/dalt-logo.png"
               alt="DALT Logo"
               width={50}
               height={50}
@@ -43,27 +43,27 @@ export default function Navbar() {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a
-              href="#inicio"
+            <Link
+              href="/#inicio"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               Inicio
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#por-que-elegirnos"
+            </Link>
+            <Link
+              href="/#por-que-elegirnos"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               ¿Por qué elegirnos?
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
-            <a
-              href="#como-funciona"
+            </Link>
+            <Link
+              href="/#como-funciona"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               Cómo funciona
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </Link>
             <Link
               href="/productos"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
@@ -71,13 +71,13 @@ export default function Navbar() {
               Productos
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
-            <a
-              href="#contacto"
+            <Link
+              href="/#contacto"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               Contacto
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </a>
+            </Link>
           </div>
 
           {/* Mobile Menu Button */}
@@ -97,27 +97,27 @@ export default function Navbar() {
         {/* Mobile Menu */}
         {isMenuOpen && (
           <div className="md:hidden pb-4 animate-slide-up">
-            <a
-              href="#inicio"
+            <Link
+              href="/#inicio"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               Inicio
-            </a>
-            <a
-              href="#por-que-elegirnos"
+            </Link>
+            <Link
+              href="/#por-que-elegirnos"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               ¿Por qué elegirnos?
-            </a>
-            <a
-              href="#como-funciona"
+            </Link>
+            <Link
+              href="/#como-funciona"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               Cómo funciona
-            </a>
+            </Link>
             <Link
               href="/productos"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
@@ -125,13 +125,13 @@ export default function Navbar() {
             >
               Productos
             </Link>
-            <a
-              href="#contacto"
+            <Link
+              href="/#contacto"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               Contacto
-            </a>
+            </Link>
           </div>
         )}
       </div>

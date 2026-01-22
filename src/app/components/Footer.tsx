@@ -1,6 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
-import { EnvelopeIcon, PhoneIcon, MapPinIcon } from "@heroicons/react/24/outline";
+import {
+  EnvelopeIcon,
+  PhoneIcon,
+  MapPinIcon,
+} from "@heroicons/react/24/outline";
 
 export default function Footer() {
   return (
@@ -11,7 +15,7 @@ export default function Footer() {
           <div className="lg:col-span-1">
             <div className="flex items-center space-x-3 mb-6">
               <Image
-                src="/dalt-logo.jpg"
+                src="/dalt-logo.png"
                 alt="DALT Logo"
                 width={50}
                 height={50}
@@ -20,25 +24,31 @@ export default function Footer() {
               <span className="text-2xl font-display font-bold">DALT</span>
             </div>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Soluciones profesionales de importación desde China. Transparencia y
-              eficiencia en cada proyecto.
+              Soluciones profesionales de importación desde China. Transparencia
+              y eficiencia en cada proyecto.
             </p>
             <div className="text-sm text-gray-400">
-              <p className="font-semibold text-white mb-1">+5 años en el mercado</p>
+              <p className="font-semibold text-white mb-1">
+                +5 años en el mercado
+              </p>
               <p>Importaciones confiables</p>
             </div>
           </div>
 
           {/* Column 2: Quick Links */}
           <div>
-            <h3 className="text-lg font-display font-bold mb-6">Enlaces Rápidos</h3>
+            <h3 className="text-lg font-display font-bold mb-6">
+              Enlaces Rápidos
+            </h3>
             <ul className="space-y-3">
               <li>
                 <Link
                   href="/#inicio"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                   Inicio
                 </Link>
               </li>
@@ -47,7 +57,9 @@ export default function Footer() {
                   href="/#por-que-elegirnos"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                   ¿Por qué elegirnos?
                 </Link>
               </li>
@@ -56,7 +68,9 @@ export default function Footer() {
                   href="/#como-funciona"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                   Cómo funciona
                 </Link>
               </li>
@@ -65,7 +79,9 @@ export default function Footer() {
                   href="/productos"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                   Productos
                 </Link>
               </li>
@@ -74,7 +90,9 @@ export default function Footer() {
                   href="/#contacto"
                   className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
                 >
-                  <span className="mr-2 group-hover:translate-x-1 transition-transform">→</span>
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
                   Contacto
                 </Link>
               </li>
@@ -149,7 +167,8 @@ export default function Footer() {
         <div className="border-t border-primary-800 mt-12 pt-8">
           <div className="flex flex-col md:flex-row items-center justify-between">
             <p className="text-sm text-gray-400">
-              © {new Date().getFullYear()} DALT Importaciones. Todos los derechos reservados.
+              © {new Date().getFullYear()} DALT Importaciones. Todos los
+              derechos reservados.
             </p>
             <div className="mt-4 md:mt-0 flex items-center space-x-6">
               <Link
