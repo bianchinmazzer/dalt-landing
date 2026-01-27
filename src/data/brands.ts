@@ -27,6 +27,10 @@ export const brands: Brand[] = [
       "/productos/senye/piedras.jpeg",
       "/productos/senye/piedras2.jpeg",
       "/productos/senye/piedras3.jpeg",
+      "/productos/senye/Pretal%20talle%20L.jpeg",
+      "/productos/senye/Pretal%20talle%20M.jpeg",
+      "/productos/senye/Pretal%20talle%20S.jpeg",
+      "/productos/senye/Pretal%20talle%20XL.jpeg",
     ],
   },
   {
@@ -36,6 +40,12 @@ export const brands: Brand[] = [
     description: "Tachos de basura para reciclaje y uso doméstico",
     images: [
       "/productos/lvxing/lvxing-logo.png",
+      "/productos/lvxing/tacho-30lts.jpeg",
+      "/productos/lvxing/tacho-30lts-2.jpeg",
+      "/productos/lvxing/tacho-40lts.jpeg",
+      "/productos/lvxing/tacho-40lts-2.jpeg",
+      "/productos/lvxing/240lts.jpg",
+      "/productos/lvxing/tacho-1100lts.jpg",
     ],
   },
   {
