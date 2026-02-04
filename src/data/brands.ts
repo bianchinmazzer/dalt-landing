@@ -35,11 +35,11 @@ export const brands: Brand[] = [
   },
   {
     id: 2,
-    name: "Lvxing",
+    name: "Amaru",
     slug: "lvxing",
     description: "Tachos de basura para reciclaje y uso doméstico",
     images: [
-      "/productos/lvxing/lvxing-logo.png",
+      "/productos/lvxing/amaru-logo.jpeg",
       "/productos/lvxing/tacho-30lts.jpeg",
       "/productos/lvxing/tacho-30lts-2.jpeg",
       "/productos/lvxing/tacho-40lts.jpeg",
