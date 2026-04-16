@@ -2,6 +2,10 @@ import type { Metadata } from "next";
 import { Inter, Poppins } from "next/font/google";
 import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import WhatsappIcon from "./components/WhatsappIcon";
+import CartDrawer from "./components/CartDrawer";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -109,7 +113,11 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${poppins.variable} font-sans antialiased`}
       >
+        <Navbar />
         {children}
+        <Footer />
+        <WhatsappIcon />
+        <CartDrawer />
         <Analytics />
       </body>
     </html>

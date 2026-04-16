@@ -1,13 +1,13 @@
 import Link from "next/link";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
+
 import ProductCard from "../components/ProductCard";
 import { brands } from "@/data/brands";
 
 export default function ProductosPage() {
   return (
     <div className="bg-white min-h-screen">
-      <Navbar />
+
 
       {/* Hero Section */}
       <section className="pt-32 pb-16 px-4 bg-gradient-to-b from-primary-50 to-white">
@@ -65,7 +65,7 @@ export default function ProductosPage() {
         </div>
       </section>
 
-      <Footer />
+
     </div>
   );
 }

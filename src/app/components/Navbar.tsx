@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
+import CartIcon from "./CartIcon";
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -72,12 +73,20 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
+              href="/tienda"
+              className="text-white hover:text-accent-400 transition-colors relative group font-medium"
+            >
+              Tienda
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
               href="/#contacto"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               Contacto
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
+            <CartIcon />
           </div>
 
           {/* Mobile Menu Button */}
@@ -126,12 +135,22 @@ export default function Navbar() {
               Productos
             </Link>
             <Link
+              href="/tienda"
+              className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Tienda
+            </Link>
+            <Link
               href="/#contacto"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
             >
               Contacto
             </Link>
+            <div className="px-4 py-3">
+              <CartIcon />
+            </div>
           </div>
         )}
       </div>

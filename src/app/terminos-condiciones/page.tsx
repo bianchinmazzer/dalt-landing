@@ -1,11 +1,11 @@
 import Link from "next/link";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+
+
 
 export default function TerminosCondicionesPage() {
   return (
     <div className="bg-white min-h-screen">
-      <Navbar />
+
 
       <div className="pt-32 pb-20 px-4">
         <div className="max-w-4xl mx-auto">
@@ -190,7 +190,7 @@ export default function TerminosCondicionesPage() {
         </div>
       </div>
 
-      <Footer />
+
     </div>
   );
 }
