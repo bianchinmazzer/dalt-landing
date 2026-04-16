@@ -4,7 +4,7 @@ import Link from 'next/link'
 import { useSearchParams } from 'next/navigation'
 import { useEffect, Suspense } from 'react'
 
-const DALT_WHATSAPP = '5492915726423'
+const DALT_WHATSAPP = '5492914263063'
 
 function PagoExitoContent() {
   const searchParams = useSearchParams()
