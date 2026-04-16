@@ -15,7 +15,7 @@ const PROVINCIAS = [
 
 export default function CheckoutPage() {
   const router = useRouter()
-  const { items, clearCart } = useCart()
+  const { items } = useCart()
   const subtotal = items.reduce((sum, i) => sum + i.price_ars * i.quantity, 0)
 
   const [form, setForm] = useState({
@@ -95,7 +95,6 @@ export default function CheckoutPage() {
         return
       }
 
-      clearCart()
       window.location.href = data.init_point
     } catch {
       setError('Error de conexión, intentá de nuevo.')

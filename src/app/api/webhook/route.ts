@@ -8,21 +8,43 @@ import type { Order } from '@/types/order'
 
 export async function POST(req: NextRequest) {
   try {
-    const body = await req.json()
+    const { searchParams } = new URL(req.url)
+    const topicParam = searchParams.get('topic')
+    const idParam = searchParams.get('id')
 
-    // MercadoPago envía topic=payment y data.id con el ID del pago
-    if (body.type !== 'payment') {
+    const body = await req.json().catch(() => ({}))
+
+    // MP puede mandar el topic en query params (IPN) o en el body (Webhooks)
+    const topic = topicParam ?? body.type
+
+    // merchant_order: buscar el payment aprobado dentro de la orden
+    if (topic === 'merchant_order' && idParam) {
+      const { MercadoPagoConfig, MerchantOrder } = await import('mercadopago')
+      const mpClient = new MercadoPagoConfig({ accessToken: process.env.MP_ACCESS_TOKEN! })
+      const merchantOrderApi = new MerchantOrder(mpClient)
+      const merchantOrder = await merchantOrderApi.get({ merchantOrderId: Number(idParam) })
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const approvedPayment = (merchantOrder as any).payments?.find((p: any) => p.status === 'approved')
+      if (!approvedPayment) return NextResponse.json({ ok: true })
+      return processPayment(String(approvedPayment.id))
+    }
+
+    // Webhook estándar con body.type === 'payment'
+    const paymentId = body.data?.id ?? (topic === 'payment' ? idParam : null)
+    if (topic !== 'payment' || !paymentId) {
       return NextResponse.json({ ok: true })
     }
 
-    const paymentId = body.data?.id
-    if (!paymentId) {
-      return NextResponse.json({ ok: true })
-    }
+    return processPayment(String(paymentId))
+  } catch (err) {
+    console.error('[Webhook] Error:', err)
+    return NextResponse.json({ ok: true })
+  }
+}
 
-    // Obtener detalles del pago desde MP
+async function processPayment(paymentId: string): Promise<NextResponse> {
+  try {
     const payment = await mpPayment.get({ id: paymentId })
-
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const paymentData = payment as any
     const status = paymentData.status as string
@@ -34,7 +56,6 @@ export async function POST(req: NextRequest) {
 
     const supabase = createServiceClient()
 
-    // Buscar la orden por preference_id
     const { data: order } = await supabase
       .from('orders')
       .select('*')
@@ -46,14 +67,12 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ok: true })
     }
 
-    // Mapear status de MP a nuestro modelo
     const orderStatus =
       status === 'approved' ? 'approved' :
       status === 'rejected' ? 'rejected' :
       status === 'cancelled' ? 'cancelled' :
       'pending'
 
-    // Actualizar orden
     await supabase
       .from('orders')
       .update({
@@ -63,49 +82,37 @@ export async function POST(req: NextRequest) {
       })
       .eq('id', order.id)
 
-    // Si se aprobó el pago
     if (orderStatus === 'approved') {
-      // Decrementar stock de cada producto
       for (const item of order.items) {
         if (item.variant_id) {
-          await supabase.rpc('decrement_variant_stock', {
-            variant_id: item.variant_id,
-            qty: item.quantity,
-          })
+          await supabase.rpc('decrement_variant_stock', { variant_id: item.variant_id, qty: item.quantity })
         } else {
-          await supabase.rpc('decrement_product_stock', {
-            product_id: item.product_id,
-            qty: item.quantity,
-          })
+          await supabase.rpc('decrement_product_stock', { product_id: item.product_id, qty: item.quantity })
         }
       }
 
       const typedOrder = order as Order
 
-      // Email de confirmación al comprador
       await getResend().emails.send({
         from: FROM_EMAIL,
         to: typedOrder.customer_email,
         subject: `¡Tu compra en DALT está confirmada! (#${order.id.slice(0, 8)})`,
         html: buildBuyerEmail(typedOrder),
-      }).catch((err) => console.error('[Webhook] Error enviando email comprador:', err))
+      }).catch((err) => console.error('[Webhook] Error email comprador:', err))
 
-      // Email de notificación al dueño
       await getResend().emails.send({
         from: FROM_EMAIL,
         to: OWNER_EMAIL,
         subject: `🛒 Nueva venta #${order.id.slice(0, 8)} - ${typedOrder.customer_name}`,
         html: buildOwnerEmail(typedOrder),
-      }).catch((err) => console.error('[Webhook] Error enviando email dueño:', err))
+      }).catch((err) => console.error('[Webhook] Error email dueño:', err))
 
-      // WhatsApp al dueño
       await sendOrderWhatsApp(typedOrder)
     }
 
     return NextResponse.json({ ok: true })
   } catch (err) {
-    console.error('[Webhook] Error:', err)
-    // Devolver 200 igual para que MP no reintente infinitamente
+    console.error('[Webhook] processPayment error:', err)
     return NextResponse.json({ ok: true })
   }
 }
@@ -122,15 +129,13 @@ function buildBuyerEmail(order: Order): string {
       <p>Hola <strong>${order.customer_name}</strong>, recibimos tu pago correctamente.</p>
       <h2>Resumen de tu pedido</h2>
       <ul>${items}</ul>
-      <p><strong>Envío:</strong> ${formatARS(order.shipping_cost_ars)}</p>
       <p><strong>Total:</strong> ${formatARS(order.total_ars)}</p>
       <h2>Dirección de entrega</h2>
       <p>
         ${addr.calle} ${addr.numero}${addr.piso_dpto ? `, ${addr.piso_dpto}` : ''}<br>
         ${addr.ciudad}, ${addr.provincia} (${addr.codigo_postal})
       </p>
-      <p>Tu pedido será despachado por <strong>Andreani</strong> en los próximos días hábiles.</p>
-      <p>Ante cualquier consulta respondé este email o escribinos por WhatsApp.</p>
+      <p>Te vamos a contactar por WhatsApp para coordinar el envío.</p>
       <p style="color: #888; font-size: 12px;">DALT Importaciones | Bahía Blanca, Buenos Aires</p>
     </div>
   `
@@ -150,7 +155,6 @@ function buildOwnerEmail(order: Order): string {
       <p><strong>Teléfono:</strong> ${order.customer_phone || 'No informado'}</p>
       <h2>Productos</h2>
       <ul>${items}</ul>
-      <p><strong>Envío Andreani:</strong> ${formatARS(order.shipping_cost_ars)}</p>
       <p><strong>Total cobrado:</strong> ${formatARS(order.total_ars)}</p>
       <h2>Dirección de envío</h2>
       <p>
