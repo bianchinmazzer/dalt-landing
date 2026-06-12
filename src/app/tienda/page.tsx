@@ -35,6 +35,16 @@ export const metadata: Metadata = {
   },
 }
 
+const PET_KEYWORDS = ['perro', 'gato', 'mascota', 'pet', 'baylor', 'canino', 'felino', 'cama', 'sillon', 'sillón', 'escalera', 'rampa', 'bebedero', 'transportadora']
+const RECYCLING_KEYWORDS = ['tacho', 'reciclaje', 'contenedor', 'basura', 'residuo', 'papelero', 'ecobox']
+
+function productPriority(product: Product): number {
+  const text = `${product.name} ${product.category} ${product.brand?.name ?? ''}`.toLowerCase()
+  if (RECYCLING_KEYWORDS.some((k) => text.includes(k))) return 1
+  if (PET_KEYWORDS.some((k) => text.includes(k))) return 0
+  return 0
+}
+
 async function getProducts(): Promise<Product[]> {
   const supabase = createServerClient()
 
@@ -54,28 +64,38 @@ async function getProducts(): Promise<Product[]> {
     return []
   }
 
-  return data as Product[]
+  const products = data as Product[]
+  return products.sort((a, b) => productPriority(a) - productPriority(b))
 }
 
 export default async function TiendaPage() {
   const products = await getProducts()
 
   return (
-    <main className="min-h-screen bg-gray-50">
-      <div className="max-w-6xl mx-auto px-4 pt-24 pb-10">
-        <div className="mb-8">
-          <h1 className="text-2xl font-display font-bold text-gray-900">Tienda</h1>
-          <p className="text-sm text-gray-500 mt-1">
-            {products.length > 0 ? `${products.length} producto${products.length !== 1 ? 's' : ''}` : ''}
+    <main className="min-h-screen bg-white">
+      {/* Header */}
+      <div className="bg-gradient-to-b from-primary-50 to-white border-b border-gray-100">
+        <div className="max-w-6xl mx-auto px-4 py-10">
+          <h1 className="text-3xl font-display font-bold text-gray-900">Tienda</h1>
+          <p className="text-gray-500 mt-1 text-sm">
+            Productos importados con envío a todo el país
           </p>
+          {products.length > 0 && (
+            <p className="text-xs text-gray-400 mt-3">
+              {products.length} producto{products.length !== 1 ? 's' : ''} disponibles
+            </p>
+          )}
         </div>
+      </div>
 
+      {/* Grid */}
+      <div className="max-w-6xl mx-auto px-4 py-8">
         {products.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-gray-500 text-lg">Estamos cargando los productos. ¡Volvé pronto!</p>
+          <div className="text-center py-24">
+            <p className="text-gray-400 text-lg">Estamos cargando los productos. ¡Volvé pronto!</p>
           </div>
         ) : (
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-5">
             {products.map((product) => (
               <ShopProductCard key={product.id} product={product} />
             ))}

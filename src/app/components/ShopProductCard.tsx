@@ -26,7 +26,6 @@ export default function ShopProductCard({ product }: ShopProductCardProps) {
 
   const handleAddToCart = (e: React.MouseEvent) => {
     e.preventDefault()
-    // Si tiene variantes, ir al detalle para elegir
     if (hasVariants) {
       router.push(`/tienda/${product.slug}`)
       return
@@ -47,19 +46,20 @@ export default function ShopProductCard({ product }: ShopProductCardProps) {
 
   return (
     <Link href={`/tienda/${product.slug}`} className="group block">
-      <div className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-200 border border-gray-100 h-full flex flex-col">
-        {/* Imagen */}
-        <div className="relative aspect-square overflow-hidden bg-gray-50">
+      <div className="bg-white rounded-2xl overflow-hidden border border-gray-100 hover:border-primary-200 hover:shadow-lg transition-all duration-200 flex flex-col h-full">
+
+        {/* Imagen — altura fija para consistencia */}
+        <div className="relative w-full bg-gray-50 overflow-hidden" style={{ paddingBottom: '100%' }}>
           <Image
             src={primaryImage}
             alt={product.name}
             fill
-            className="object-contain p-3 group-hover:scale-105 transition-transform duration-300"
+            className="object-contain p-4 group-hover:scale-105 transition-transform duration-300"
             sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
           />
           {outOfStock && (
-            <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
-              <span className="bg-white text-gray-700 text-xs font-semibold px-3 py-1 rounded-full">
+            <div className="absolute inset-0 bg-white/70 flex items-center justify-center">
+              <span className="bg-gray-800 text-white text-xs font-semibold px-3 py-1 rounded-full">
                 Sin stock
               </span>
             </div>
@@ -67,32 +67,33 @@ export default function ShopProductCard({ product }: ShopProductCardProps) {
         </div>
 
         {/* Info */}
-        <div className="p-3 flex flex-col flex-1 gap-1">
-          <p className="text-xs text-primary-600 font-medium uppercase tracking-wide">
+        <div className="p-3 flex flex-col flex-1">
+          <p className="text-[11px] text-primary-500 font-semibold uppercase tracking-widest mb-1">
             {product.brand?.name ?? product.category}
           </p>
-          <h3 className="text-gray-900 font-semibold text-sm leading-tight line-clamp-2 flex-1">
+          <h3 className="text-gray-800 font-semibold text-sm leading-snug line-clamp-2 flex-1 mb-2">
             {product.name}
           </h3>
-          <PriceDisplay centavos={product.price_ars} className="text-base font-bold text-gray-900 mt-1" />
-          {hasVariants && (
-            <p className="text-xs text-gray-400">Varios talles</p>
-          )}
 
-          {/* Botón */}
-          <button
-            onClick={handleAddToCart}
-            disabled={outOfStock}
-            className={`mt-2 w-full py-2 rounded-lg text-sm font-semibold transition-colors ${
-              outOfStock
-                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
-                : hasVariants
-                ? 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                : 'bg-primary-600 text-white hover:bg-primary-700'
-            }`}
-          >
-            {outOfStock ? 'Sin stock' : hasVariants ? 'Elegir talle' : 'Agregar al carrito'}
-          </button>
+          <div className="mt-auto">
+            <PriceDisplay centavos={product.price_ars} className="text-lg font-bold text-gray-900 block mb-2" />
+            {hasVariants && (
+              <p className="text-[11px] text-gray-400 mb-2">Varios talles disponibles</p>
+            )}
+            <button
+              onClick={handleAddToCart}
+              disabled={outOfStock}
+              className={`w-full py-2.5 rounded-xl text-sm font-semibold transition-all duration-200 ${
+                outOfStock
+                  ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                  : hasVariants
+                  ? 'bg-primary-50 text-primary-700 hover:bg-primary-100'
+                  : 'bg-primary-600 text-white hover:bg-primary-700 active:scale-95'
+              }`}
+            >
+              {outOfStock ? 'Sin stock' : hasVariants ? 'Ver talles' : 'Agregar'}
+            </button>
+          </div>
         </div>
       </div>
     </Link>

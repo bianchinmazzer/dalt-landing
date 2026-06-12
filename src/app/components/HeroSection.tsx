@@ -14,7 +14,7 @@ export default function HeroSection() {
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 text-center leading-tight">
           Importaciones profesionales
           <br />
-          <span className="text-gradient-blue">para tu negocio</span>
+          <span className="text-primary-900">para tu negocio</span>
         </h1>
 
         <p className="text-base md:text-lg mb-10 max-w-xl text-center text-gray-500 leading-relaxed">

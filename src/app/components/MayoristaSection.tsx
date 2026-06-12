@@ -111,7 +111,7 @@ export default function MayoristaSection() {
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-primary-900 mb-6 leading-tight">
             Importaciones profesionales
             <br />
-            <span className="text-gradient-blue">para tu negocio</span>
+            <span className="text-primary-900">para tu negocio</span>
           </h2>
           <p className="text-lg md:text-xl text-gray-500 max-w-2xl mx-auto leading-relaxed">
             Somos tu aliado de importación. Vos elegís el producto,{" "}

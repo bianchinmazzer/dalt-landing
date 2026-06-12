@@ -40,7 +40,7 @@ export default function ProcessSection() {
         "Asesoramiento profesional",
       ],
       badge: "Para tu negocio",
-      color: "from-accent-500 to-accent-700",
+      color: "from-primary-500 to-primary-700",
     },
   ];
 
