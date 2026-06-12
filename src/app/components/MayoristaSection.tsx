@@ -84,7 +84,7 @@ export default function MayoristaSection() {
       `¿Podemos hablar?`,
     ];
     const message = lines.join("\n");
-    window.open(`https://wa.me/5492915726423?text=${encodeURIComponent(message)}`, "_blank");
+    window.open(`https://wa.me/5492914263063?text=${encodeURIComponent(message)}`, "_blank");
   };
 
   const resetWizard = () => {
@@ -375,7 +375,7 @@ export default function MayoristaSection() {
           <p className="text-gray-400 text-sm">
             ¿Tenés dudas antes de empezar?{" "}
             <a
-              href="https://wa.me/5492915726423"
+              href="https://wa.me/5492914263063"
               target="_blank"
               rel="noopener noreferrer"
               className="text-primary-600 hover:text-primary-800 underline underline-offset-4 transition-colors"

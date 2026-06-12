@@ -172,7 +172,7 @@ export default function PoliticaPrivacidadPage() {
               </p>
               <ul className="list-none text-gray-700 space-y-2">
                 <li>Email: <a href="mailto:dalt.importaciones@gmail.com" className="text-primary-600 hover:text-primary-700">dalt.importaciones@gmail.com</a></li>
-                <li>WhatsApp: <a href="https://wa.me/5492915726423" className="text-primary-600 hover:text-primary-700">+54 9 291 572 6423</a></li>
+                <li>WhatsApp: <a href="https://wa.me/5492914263063" className="text-primary-600 hover:text-primary-700">+54 9 291 426 3063</a></li>
               </ul>
             </section>
 
@@ -236,7 +236,7 @@ export default function PoliticaPrivacidadPage() {
               </p>
               <ul className="list-none text-gray-700 space-y-2">
                 <li>Email: <a href="mailto:dalt.importaciones@gmail.com" className="text-primary-600 hover:text-primary-700">dalt.importaciones@gmail.com</a></li>
-                <li>WhatsApp: <a href="https://wa.me/5492915726423" className="text-primary-600 hover:text-primary-700">+54 9 291 572 6423</a></li>
+                <li>WhatsApp: <a href="https://wa.me/5492914263063" className="text-primary-600 hover:text-primary-700">+54 9 291 426 3063</a></li>
               </ul>
             </section>
 

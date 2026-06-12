@@ -69,7 +69,7 @@ export default function ContactForm() {
 
     const message = lines.join("\n");
     window.open(
-      `https://wa.me/5492915726423?text=${encodeURIComponent(message)}`,
+      `https://wa.me/5492914263063?text=${encodeURIComponent(message)}`,
       "_blank",
     );
 
@@ -287,12 +287,12 @@ export default function ContactForm() {
                     WhatsApp
                   </h3>
                   <a
-                    href="https://wa.me/5492915726423"
+                    href="https://wa.me/5492914263063"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-gray-600 hover:text-green-600 transition-colors"
                   >
-                    +54 9 291 572 6423
+                    +54 9 291 426 3063
                   </a>
                   <p className="text-sm text-gray-500 mt-1">
                     Respuesta en menos de 24hs
