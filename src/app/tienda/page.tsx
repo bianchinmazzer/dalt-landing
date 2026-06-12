@@ -6,8 +6,33 @@ import type { Metadata } from 'next'
 export const dynamic = 'force-dynamic'
 
 export const metadata: Metadata = {
-  title: 'Tienda | DALT Importaciones',
-  description: 'Comprá productos importados de calidad: accesorios para mascotas, cestos de reciclado y muebles. Envíos a todo el país.',
+  title: 'Tienda Online — Accesorios para Mascotas y Reciclaje',
+  description: 'Comprá accesorios premium para mascotas y contenedores de reciclaje importados. Camas, transportadoras, bebederos automáticos, cestos de reciclado y más. Envíos a todo el país.',
+  keywords: [
+    'tienda accesorios mascotas argentina',
+    'comprar accesorios mascotas online',
+    'camas mascotas online',
+    'transportadoras mascotas',
+    'bebederos automáticos mascotas',
+    'cestos reciclado hogar',
+    'contenedores reciclaje comprar',
+  ],
+  alternates: {
+    canonical: '/tienda',
+  },
+  openGraph: {
+    title: 'Tienda Online — Accesorios para Mascotas y Reciclaje | DALT Importaciones',
+    description: 'Accesorios premium para mascotas y contenedores de reciclaje importados. Envíos a todo el país.',
+    url: 'https://www.daltimportaciones.com.ar/tienda',
+    images: [
+      {
+        url: '/og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Tienda DALT Importaciones',
+      },
+    ],
+  },
 }
 
 async function getProducts(): Promise<Product[]> {

@@ -1,8 +1,40 @@
+import type { Metadata } from "next";
 import Link from "next/link";
-
-
 import ProductCard from "../components/ProductCard";
 import { brands } from "@/data/brands";
+
+export const metadata: Metadata = {
+  title: "Accesorios para Mascotas y Contenedores de Reciclaje Mayorista",
+  description:
+    "Conocé nuestras líneas de productos: accesorios premium para mascotas (camas, transportadoras, bebederos, correas) y contenedores de reciclaje (20L a 1100L). Venta mayorista y distribuidor en Argentina.",
+  keywords: [
+    "accesorios mascotas mayorista",
+    "camas mascotas por mayor",
+    "transportadoras mascotas mayorista",
+    "bebederos automáticos mascotas",
+    "contenedores reciclaje argentina",
+    "cestos reciclaje municipal",
+    "proveedor pet shop argentina",
+    "accesorios mascotas importados",
+  ],
+  alternates: {
+    canonical: "/productos",
+  },
+  openGraph: {
+    title: "Accesorios para Mascotas y Contenedores de Reciclaje Mayorista | DALT Importaciones",
+    description:
+      "Líneas mayoristas de accesorios para mascotas y contenedores de reciclaje. Importación directa, stock permanente en Argentina.",
+    url: "https://www.daltimportaciones.com.ar/productos",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Productos DALT Importaciones - Accesorios para Mascotas y Reciclaje",
+      },
+    ],
+  },
+};
 
 export default function ProductosPage() {
   return (
