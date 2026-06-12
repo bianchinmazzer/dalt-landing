@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsappIcon from "./components/WhatsappIcon";
+import BackToTop from "./components/BackToTop";
 import CartDrawer from "./components/CartDrawer";
 import SchemaOrg from "./components/SchemaOrg";
 
@@ -26,7 +27,7 @@ export const metadata: Metadata = {
     template: "%s | DALT Importaciones",
   },
   description:
-    "Proveedor mayorista de accesorios premium para mascotas y contenedores de reciclaje. Importación directa, stock permanente en Argentina. Atención a pet shops, veterinarias y distribuidores.",
+    "Importaciones profesionales para tu negocio. Gestionamos todo el proceso para distribuidoras, locales y empresas de cualquier rubro en Argentina. Envíos a todo el país.",
   keywords: [
     "accesorios mascotas mayorista argentina",
     "proveedor pet shop argentina",
@@ -99,6 +100,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsappIcon />
+        <BackToTop />
         <CartDrawer />
         <Analytics />
       </body>

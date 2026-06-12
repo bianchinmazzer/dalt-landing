@@ -20,9 +20,9 @@ export default function Navbar() {
 
   return (
     <nav
-      className={`fixed w-full top-0 z-50 transition-all duration-300 ${
+      className={`navbar sticky w-full top-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-primary-800/95 backdrop-blur-navbar shadow-lg"
+          ? "bg-primary-800 shadow-lg"
           : "bg-primary-900 shadow-md"
       }`}
     >
@@ -52,24 +52,17 @@ export default function Navbar() {
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
-              href="/#por-que-elegirnos"
-              className="text-white hover:text-accent-400 transition-colors relative group font-medium"
-            >
-              ¿Por qué elegirnos?
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
-              href="/#como-funciona"
-              className="text-white hover:text-accent-400 transition-colors relative group font-medium"
-            >
-              Cómo funciona
-              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
-            </Link>
-            <Link
               href="/productos"
               className="text-white hover:text-accent-400 transition-colors relative group font-medium"
             >
               Productos
+              <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
+            </Link>
+            <Link
+              href="/mayoristas"
+              className="text-white hover:text-accent-400 transition-colors relative group font-medium"
+            >
+              Mayoristas
               <span className="absolute bottom-0 left-0 w-0 h-0.5 bg-accent-400 transition-all duration-300 group-hover:w-full"></span>
             </Link>
             <Link
@@ -114,20 +107,6 @@ export default function Navbar() {
               Inicio
             </Link>
             <Link
-              href="/#por-que-elegirnos"
-              className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              ¿Por qué elegirnos?
-            </Link>
-            <Link
-              href="/#como-funciona"
-              className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
-              onClick={() => setIsMenuOpen(false)}
-            >
-              Cómo funciona
-            </Link>
-            <Link
               href="/productos"
               className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
               onClick={() => setIsMenuOpen(false)}
@@ -140,6 +119,13 @@ export default function Navbar() {
               onClick={() => setIsMenuOpen(false)}
             >
               Tienda
+            </Link>
+            <Link
+              href="/mayoristas"
+              className="block py-3 text-white hover:text-accent-400 hover:bg-primary-800 px-4 rounded transition-all"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Mayoristas
             </Link>
             <Link
               href="/#contacto"

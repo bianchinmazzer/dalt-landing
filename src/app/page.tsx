@@ -2,6 +2,7 @@ import HeroSection from "./components/HeroSection";
 import WhyChooseUs from "./components/WhyChooseUs";
 import ProcessSection from "./components/ProcessSection";
 import ProductsSection from "./components/ProductsSection";
+import MayoristaSection from "./components/MayoristaSection";
 import ContactForm from "./components/ContactForm";
 
 export default function Home() {
@@ -17,6 +18,9 @@ export default function Home() {
         <ProcessSection />
       </div>
       <ProductsSection />
+      <div id="mayoristas">
+        <MayoristaSection />
+      </div>
       <div id="contacto">
         <ContactForm />
       </div>
