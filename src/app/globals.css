@@ -19,6 +19,14 @@ body {
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
+  scroll-padding-top: 82px;
+}
+
+/* Force navbar to stay at top */
+nav.navbar {
+  position: sticky !important;
+  top: 0 !important;
+  z-index: 50 !important;
 }
 
 /* Custom utility classes */

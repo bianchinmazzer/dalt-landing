@@ -24,14 +24,12 @@ export default function Footer() {
               <span className="text-2xl font-display font-bold">DALT</span>
             </div>
             <p className="text-gray-300 leading-relaxed mb-4">
-              Soluciones profesionales de importación desde China. Transparencia
-              y eficiencia en cada proyecto.
+              Importaciones profesionales para tu negocio. Gestionamos todo
+              el proceso con transparencia y acompañamiento personalizado.
             </p>
             <div className="text-sm text-gray-400">
-              <p className="font-semibold text-white mb-1">
-                +5 años en el mercado
-              </p>
-              <p>Importaciones confiables</p>
+              <p className="font-semibold text-white mb-1">Bahía Blanca, Argentina</p>
+              <p>Envíos a todo el país</p>
             </div>
           </div>
 
@@ -83,6 +81,17 @@ export default function Footer() {
                     →
                   </span>
                   Productos
+                </Link>
+              </li>
+              <li>
+                <Link
+                  href="/mayoristas"
+                  className="text-gray-300 hover:text-accent-400 transition-colors flex items-center group"
+                >
+                  <span className="mr-2 group-hover:translate-x-1 transition-transform">
+                    →
+                  </span>
+                  Mayoristas
                 </Link>
               </li>
               <li>

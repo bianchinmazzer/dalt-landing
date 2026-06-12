@@ -5,6 +5,7 @@ import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import WhatsappIcon from "./components/WhatsappIcon";
+import BackToTop from "./components/BackToTop";
 import CartDrawer from "./components/CartDrawer";
 
 const inter = Inter({
@@ -21,7 +22,7 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: "DALT Importaciones | Soluciones de Importación desde China",
   description:
-    "Importamos productos de China con transparencia y eficiencia. Servicio personalizado para negocios y consumidores finales en Argentina. Venta mayorista y minorista.",
+    "Importaciones profesionales para tu negocio. Gestionamos todo el proceso para distribuidoras, locales y empresas de cualquier rubro en Argentina. Envíos a todo el país.",
   keywords: [
     "importaciones",
     "China",
@@ -93,7 +94,7 @@ export default function RootLayout({
               url: "https://www.daltimportaciones.com.ar",
               logo: "https://www.daltimportaciones.com.ar/dalt-logo.png",
               description:
-                "Soluciones profesionales de importación desde China. Transparencia y eficiencia en cada proyecto.",
+                "Importaciones profesionales para tu negocio. Gestión completa del proceso con transparencia y acompañamiento personalizado.",
               address: {
                 "@type": "PostalAddress",
                 addressCountry: "AR",
@@ -117,6 +118,7 @@ export default function RootLayout({
         {children}
         <Footer />
         <WhatsappIcon />
+        <BackToTop />
         <CartDrawer />
         <Analytics />
       </body>

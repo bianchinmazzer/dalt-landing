@@ -49,15 +49,29 @@ export default function ContactForm() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const tipoClienteText = form.tipoCliente
-      ? form.tipoCliente === "para-ti"
+    const tipoClienteText =
+      form.tipoCliente === "para-ti"
         ? "Consumidor Final"
-        : "Negocio"
-      : "No especificado";
+        : form.tipoCliente === "para-negocio"
+        ? "Negocio"
+        : "";
 
-    const marcaText = form.marca || "No especificada";
+    const lines = [
+      `Hola DALT! 👋`,
+      ``,
+      `Nombre: ${form.nombre}`,
+      `Email: ${form.email}`,
+      tipoClienteText ? `Tipo de cliente: ${tipoClienteText}` : "",
+      form.marca ? `Marca de interés: ${form.marca}` : "",
+      ``,
+      `Mensaje: ${form.mensaje}`,
+    ].filter(Boolean);
 
-    window.location.href = `mailto:dalt.importaciones@gmail.com?subject=Consulta desde landing&body=Nombre: ${form.nombre}%0AEmail: ${form.email}%0ATipo de Cliente: ${tipoClienteText}%0AMarca de Interés: ${marcaText}%0A%0AMensaje: ${form.mensaje}`;
+    const message = lines.join("\n");
+    window.open(
+      `https://wa.me/5492915726423?text=${encodeURIComponent(message)}`,
+      "_blank",
+    );
 
     setSent(true);
     setTimeout(() => setSent(false), 5000);
