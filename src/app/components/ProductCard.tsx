@@ -81,8 +81,8 @@ export default function ProductCard({ brand }: ProductCardProps) {
                   className="flex-[0_0_100%] min-w-0 h-full flex items-center justify-center p-4"
                 >
                   <Image
-                    src={image}
-                    alt={`${brand.name} - Imagen ${index + 1}`}
+                    src={image.url}
+                    alt={image.alt}
                     width={300}
                     height={300}
                     className="w-full h-full object-contain"
@@ -160,7 +160,6 @@ export default function ProductCard({ brand }: ProductCardProps) {
         onClose={() => setLightboxOpen(false)}
         onPrev={lightboxPrev}
         onNext={lightboxNext}
-        altText={brand.name}
       />
     </>
   );

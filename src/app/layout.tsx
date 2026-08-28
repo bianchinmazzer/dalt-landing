@@ -23,23 +23,19 @@ const poppins = Poppins({
 export const metadata: Metadata = {
   title: {
     default:
-      "DALT Importaciones | Mayorista de Accesorios para Mascotas y Reciclaje en Argentina",
+      "DALT Importaciones | Mayorista de Accesorios para Mascotas Argentina",
     template: "%s | DALT Importaciones",
   },
   description:
-    "Importaciones profesionales para tu negocio. Gestionamos todo el proceso para distribuidoras, locales y empresas de cualquier rubro en Argentina. Envíos a todo el país.",
+    "Comprá accesorios para mascotas directo al importador. Pretales, mochilas transportadoras, comederos automáticos y más. Venta mayorista desde Bahía Blanca. Envíos a todo el país.",
   keywords: [
-    "accesorios mascotas mayorista argentina",
-    "proveedor pet shop argentina",
-    "contenedores reciclaje argentina",
     "mayorista mascotas argentina",
-    "accesorios mascotas por mayor",
-    "camas mascotas mayorista",
-    "bebederos automáticos mascotas",
-    "transportadoras mascotas mayorista",
-    "cestos reciclaje municipio",
-    "importaciones argentina mayorista",
-    "DALT importaciones",
+    "importador directo mascotas",
+    "pretal perro por mayor",
+    "mochila transportadora mascota mayorista",
+    "petshop por mayor bahia blanca",
+    "accesorios mascotas importados argentina",
+    "comedero automatico mascota por mayor",
   ],
   authors: [{ name: "DALT Importaciones" }],
   creator: "DALT Importaciones",
@@ -55,26 +51,24 @@ export const metadata: Metadata = {
     locale: "es_AR",
     url: "https://www.daltimportaciones.com.ar",
     siteName: "DALT Importaciones",
-    title:
-      "DALT Importaciones | Mayorista de Accesorios para Mascotas y Reciclaje en Argentina",
+    title: "DALT Importaciones | Mayorista de Accesorios para Mascotas",
     description:
-      "Proveedor mayorista de accesorios para mascotas y contenedores de reciclaje. Importación directa y stock permanente en Argentina.",
+      "Stock disponible en Bahía Blanca. Sin intermediarios. Pretales, mochilas, comederos y más para tu petshop.",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-dalt.png",
         width: 1200,
         height: 630,
-        alt: "DALT Importaciones - Mayorista de Accesorios para Mascotas y Reciclaje",
+        alt: "DALT Importaciones - Mayorista de Accesorios para Mascotas",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "DALT Importaciones | Mayorista de Accesorios para Mascotas y Reciclaje",
+    title: "DALT Importaciones | Mayorista de Accesorios para Mascotas",
     description:
-      "Proveedor mayorista de accesorios para mascotas y contenedores de reciclaje. Stock permanente en Argentina.",
-    images: ["/og-image.png"],
+      "Stock disponible en Bahía Blanca. Sin intermediarios. Pretales, mochilas, comederos y más para tu petshop.",
+    images: ["/og-image-dalt.png"],
   },
   robots: {
     index: true,

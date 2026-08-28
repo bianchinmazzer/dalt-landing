@@ -7,15 +7,15 @@ import {
   ChevronLeftIcon,
   ChevronRightIcon,
 } from "@heroicons/react/24/outline";
+import type { BrandImage } from "@/data/brands";
 
 interface ImageLightboxProps {
-  images: string[];
+  images: BrandImage[];
   currentIndex: number;
   isOpen: boolean;
   onClose: () => void;
   onPrev: () => void;
   onNext: () => void;
-  altText: string;
 }
 
 export default function ImageLightbox({
@@ -25,7 +25,6 @@ export default function ImageLightbox({
   onClose,
   onPrev,
   onNext,
-  altText,
 }: ImageLightboxProps) {
   const handleKeyDown = useCallback(
     (e: KeyboardEvent) => {
@@ -96,8 +95,8 @@ export default function ImageLightbox({
         onClick={(e) => e.stopPropagation()}
       >
         <Image
-          src={images[currentIndex]}
-          alt={`${altText} - Imagen ${currentIndex + 1}`}
+          src={images[currentIndex].url}
+          alt={images[currentIndex].alt}
           width={1200}
           height={1200}
           className="max-w-full max-h-[80vh] object-contain rounded-lg"

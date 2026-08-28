@@ -90,7 +90,7 @@ export default function ProductDetail({ product }: { product: Product }) {
               <div className="relative aspect-square rounded-xl overflow-hidden bg-gray-50">
                 <Image
                   src={selectedImage}
-                  alt={product.name}
+                  alt={`${product.name} - mayorista mascotas Argentina`}
                   fill
                   className="object-contain p-4"
                   sizes="(max-width: 768px) 100vw, 50vw"

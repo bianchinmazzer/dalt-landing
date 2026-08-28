@@ -12,9 +12,9 @@ export default function HeroSection() {
       {/* Main Content */}
       <div className="relative z-10 flex flex-col items-center">
         <h1 className="text-5xl md:text-6xl lg:text-7xl font-display font-bold mb-6 text-center leading-tight">
-          Importaciones profesionales
+          Importador directo de
           <br />
-          <span className="text-primary-900">para tu negocio</span>
+          <span className="text-primary-900">accesorios para mascotas</span>
         </h1>
 
         <p className="text-base md:text-lg mb-10 max-w-xl text-center text-gray-500 leading-relaxed">
