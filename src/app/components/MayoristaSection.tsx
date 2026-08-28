@@ -1,11 +1,19 @@
+"use client";
+
+import { useCallback, useEffect, useState } from "react";
+import Image from "next/image";
 import {
   CreditCardIcon,
   TruckIcon,
   DocumentTextIcon,
   ClockIcon,
+  ChevronLeftIcon,
+  ChevronRightIcon,
 } from "@heroicons/react/24/outline";
 
 const WHATSAPP_NUMBER = "5492914263063";
+const MAYORISTAS_IMAGE_BASE = "/images/mayoristas";
+const CAROUSEL_AUTOPLAY_MS = 3000;
 
 type Pack = {
   id: string;
@@ -14,12 +22,14 @@ type Pack = {
   badgeClass: string;
   description: string;
   items: string[];
+  images: string[];
   totalUnits: number;
   price: number;
 };
 
 type LooseItem = {
   name: string;
+  image: string;
   price: number;
   minQty: number;
 };
@@ -42,6 +52,14 @@ const packs: Pack[] = [
       "5 comederos automáticos",
       "5 bebederos automáticos",
     ],
+    images: [
+      "pretal negro.jpeg",
+      "Pretal Rojo.jpeg",
+      "pretal rosa.jpeg",
+      "Pretal Violeta.jpeg",
+      "Comedero.jpeg",
+      "Bebedero.jpeg",
+    ],
     totalUnits: 30,
     price: 550000,
   },
@@ -55,6 +73,11 @@ const packs: Pack[] = [
       "5 mochilas transportadoras",
       "10 bolsos mascota cuero",
       "10 bolsos extensibles",
+    ],
+    images: [
+      "Mochila transportadora.jpeg",
+      "Bolso cuero.jpeg",
+      "Bolso expandible.jpeg",
     ],
     totalUnits: 25,
     price: 1630000,
@@ -70,20 +93,61 @@ const packs: Pack[] = [
       "5 areneros/baños para gato",
       "5 comederos automáticos",
     ],
+    images: ["Trepador .jpeg", "litera gatos.jpeg", "Comedero.jpeg"],
     totalUnits: 15,
     price: 860000,
   },
 ];
 
 const looseItems: LooseItem[] = [
-  { name: "Pretal ajustable (S/M/L/XL)", price: 11000, minQty: 10 },
-  { name: "Mochila transportadora", price: 75000, minQty: 3 },
-  { name: "Bolso mascota cuero", price: 68000, minQty: 5 },
-  { name: "Bolso extensible", price: 52000, minQty: 5 },
-  { name: "Comedero automático", price: 28000, minQty: 5 },
-  { name: "Bebedero automático", price: 28000, minQty: 5 },
-  { name: "Árbol rascador gato", price: 82000, minQty: 3 },
-  { name: "Arenero/baño gato", price: 56000, minQty: 3 },
+  {
+    name: "Pretal ajustable (S/M/L/XL)",
+    image: "pretal negro.jpeg",
+    price: 11000,
+    minQty: 10,
+  },
+  {
+    name: "Mochila transportadora",
+    image: "Mochila transportadora.jpeg",
+    price: 75000,
+    minQty: 3,
+  },
+  {
+    name: "Bolso mascota cuero",
+    image: "Bolso cuero.jpeg",
+    price: 68000,
+    minQty: 5,
+  },
+  {
+    name: "Bolso extensible",
+    image: "Bolso expandible.jpeg",
+    price: 52000,
+    minQty: 5,
+  },
+  {
+    name: "Comedero automático",
+    image: "Comedero.jpeg",
+    price: 28000,
+    minQty: 5,
+  },
+  {
+    name: "Bebedero automático",
+    image: "Bebedero.jpeg",
+    price: 28000,
+    minQty: 5,
+  },
+  {
+    name: "Árbol rascador gato",
+    image: "Trepador .jpeg",
+    price: 82000,
+    minQty: 3,
+  },
+  {
+    name: "Arenero/baño gato",
+    image: "litera gatos.jpeg",
+    price: 56000,
+    minQty: 3,
+  },
 ];
 
 const conditions: Condition[] = [
@@ -108,6 +172,71 @@ function formatArsWhole(amount: number): string {
 
 function buildWhatsappLink(message: string): string {
   return `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(message)}`;
+}
+
+type PackCarouselProps = {
+  images: string[];
+  packName: string;
+};
+
+function PackCarousel({ images, packName }: PackCarouselProps) {
+  const [activeIndex, setActiveIndex] = useState(0);
+
+  const goToNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % images.length);
+  }, [images.length]);
+
+  const goToPrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + images.length) % images.length);
+  }, [images.length]);
+
+  useEffect(() => {
+    const intervalId = setInterval(goToNext, CAROUSEL_AUTOPLAY_MS);
+    return () => clearInterval(intervalId);
+  }, [goToNext]);
+
+  return (
+    <div className="relative h-48 md:h-52 bg-primary-50">
+      <Image
+        src={`${MAYORISTAS_IMAGE_BASE}/${images[activeIndex]}`}
+        alt={`${packName} - foto ${activeIndex + 1} de ${images.length}`}
+        fill
+        sizes="(max-width: 768px) 100vw, 33vw"
+        className="object-cover w-full h-full rounded-t-xl"
+      />
+
+      <button
+        type="button"
+        onClick={goToPrev}
+        aria-label="Foto anterior"
+        className="absolute left-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white/90 text-primary-900 shadow-sm transition-colors duration-200"
+      >
+        <ChevronLeftIcon className="w-5 h-5" />
+      </button>
+      <button
+        type="button"
+        onClick={goToNext}
+        aria-label="Foto siguiente"
+        className="absolute right-2 top-1/2 -translate-y-1/2 flex items-center justify-center w-8 h-8 rounded-full bg-white/70 hover:bg-white/90 text-primary-900 shadow-sm transition-colors duration-200"
+      >
+        <ChevronRightIcon className="w-5 h-5" />
+      </button>
+
+      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex items-center gap-1.5">
+        {images.map((image, index) => (
+          <button
+            key={image}
+            type="button"
+            onClick={() => setActiveIndex(index)}
+            aria-label={`Ir a foto ${index + 1} de ${images.length}`}
+            className={`w-1.5 h-1.5 rounded-full transition-colors duration-200 ${
+              index === activeIndex ? "bg-white" : "bg-white/50"
+            }`}
+          />
+        ))}
+      </div>
+    </div>
+  );
 }
 
 export default function MayoristaSection() {
@@ -152,49 +281,53 @@ export default function MayoristaSection() {
             return (
               <div
                 key={pack.id}
-                className="flex flex-col bg-white rounded-2xl p-8 border border-primary-100 shadow-md hover:shadow-lg transition-shadow duration-300"
+                className="flex flex-col bg-white rounded-2xl overflow-hidden border border-primary-100 shadow-md hover:shadow-lg transition-shadow duration-300"
               >
-                <span
-                  className={`self-start text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide mb-4 ${pack.badgeClass}`}
-                >
-                  {pack.badge}
-                </span>
+                <PackCarousel images={pack.images} packName={pack.name} />
 
-                <h3 className="text-2xl font-display font-bold text-primary-900 mb-1">
-                  {pack.name}
-                </h3>
-                <p className="text-gray-500 text-sm mb-6 leading-relaxed">
-                  {pack.description}
-                </p>
-
-                <ul className="space-y-2.5 mb-6 flex-1">
-                  {pack.items.map((item) => (
-                    <li key={item} className="flex items-start gap-2 text-gray-700 text-sm">
-                      <span className="text-primary-700 font-bold" aria-hidden="true">✓</span>
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <p className="text-gray-400 text-xs uppercase tracking-widest mb-4">
-                  Total: {pack.totalUnits} unidades
-                </p>
-
-                <div className="mb-6">
-                  <span className="text-4xl font-display font-bold text-primary-900">
-                    {formatArsWhole(pack.price)}
+                <div className="flex flex-col flex-1 p-8">
+                  <span
+                    className={`self-start text-xs font-semibold px-3 py-1 rounded-full uppercase tracking-wide mb-4 ${pack.badgeClass}`}
+                  >
+                    {pack.badge}
                   </span>
-                  <span className="text-gray-400 text-sm font-medium ml-1">ARS</span>
-                </div>
 
-                <a
-                  href={packLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="mt-auto w-full text-center bg-primary-700 hover:bg-primary-800 text-white font-semibold py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
-                >
-                  Quiero este pack
-                </a>
+                  <h3 className="text-2xl font-display font-bold text-primary-900 mb-1">
+                    {pack.name}
+                  </h3>
+                  <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+                    {pack.description}
+                  </p>
+
+                  <ul className="space-y-2.5 mb-6 flex-1">
+                    {pack.items.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-gray-700 text-sm">
+                        <span className="text-primary-700 font-bold" aria-hidden="true">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+
+                  <p className="text-gray-400 text-xs uppercase tracking-widest mb-4">
+                    Total: {pack.totalUnits} unidades
+                  </p>
+
+                  <div className="mb-6">
+                    <span className="text-4xl font-display font-bold text-primary-900">
+                      {formatArsWhole(pack.price)}
+                    </span>
+                    <span className="text-gray-400 text-sm font-medium ml-1">ARS</span>
+                  </div>
+
+                  <a
+                    href={packLink}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="mt-auto w-full text-center bg-primary-700 hover:bg-primary-800 text-white font-semibold py-3.5 rounded-full shadow-lg hover:shadow-xl transition-all duration-300"
+                  >
+                    Quiero este pack
+                  </a>
+                </div>
               </div>
             );
           })}
@@ -209,29 +342,34 @@ export default function MayoristaSection() {
             ¿Preferís armar tu propio pedido? Estos son los precios por unidad.
           </p>
 
-          <div className="overflow-x-auto rounded-2xl border border-primary-100 bg-primary-50">
-            <table className="w-full text-left border-collapse min-w-[520px]">
-              <thead>
-                <tr className="text-primary-700 text-xs uppercase tracking-widest">
-                  <th scope="col" className="px-6 py-4 font-semibold">Producto</th>
-                  <th scope="col" className="px-6 py-4 font-semibold">Precio por unidad</th>
-                  <th scope="col" className="px-6 py-4 font-semibold">Mínimo</th>
-                </tr>
-              </thead>
-              <tbody>
-                {looseItems.map((item) => (
-                  <tr key={item.name} className="bg-white border-t border-primary-100">
-                    <td className="px-6 py-4 text-gray-700 font-medium">{item.name}</td>
-                    <td className="px-6 py-4 text-primary-800 font-bold whitespace-nowrap">
-                      {formatArsWhole(item.price)}/u
-                    </td>
-                    <td className="px-6 py-4 text-gray-500 text-sm">
-                      mín. {item.minQty} unidades
-                    </td>
-                  </tr>
-                ))}
-              </tbody>
-            </table>
+          <div className="rounded-2xl border border-primary-100 bg-primary-50 overflow-hidden">
+            {looseItems.map((item, index) => (
+              <div
+                key={item.name}
+                className={`flex items-center gap-4 sm:gap-6 px-4 sm:px-6 py-4 bg-white ${
+                  index > 0 ? "border-t border-primary-100" : ""
+                }`}
+              >
+                <div className="relative flex-shrink-0 w-16 h-16 sm:w-20 sm:h-20 rounded-lg overflow-hidden">
+                  <Image
+                    src={`${MAYORISTAS_IMAGE_BASE}/${item.image}`}
+                    alt={item.name}
+                    fill
+                    sizes="80px"
+                    className="object-cover"
+                  />
+                </div>
+
+                <div className="flex-1 min-w-0">
+                  <p className="text-gray-700 font-medium">{item.name}</p>
+                  <p className="text-gray-500 text-sm">mín. {item.minQty} unidades</p>
+                </div>
+
+                <p className="text-primary-700 font-bold whitespace-nowrap">
+                  {formatArsWhole(item.price)}/u
+                </p>
+              </div>
+            ))}
           </div>
 
           <div className="text-center mt-8">
